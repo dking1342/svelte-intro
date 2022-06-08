@@ -20,6 +20,7 @@
 </script>
 
 <script lang="ts">
+  import "./global.css";
   import CharacterList from "../components/CharacterList.svelte";
   import type { Characters } from "src/types/characters";
   export let data: Characters;
