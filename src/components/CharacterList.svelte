@@ -4,12 +4,14 @@
   export let characters: CharacterResults[];
 </script>
 
-<h3>Rick and Morty Characters</h3>
-<div class="popular-movies">
-  {#each characters as character}
-    <CharacterCard {character} />
-  {/each}
-</div>
+<section class="container">
+  <h3>Rick and Morty Characters</h3>
+  <div class="popular-movies">
+    {#each characters as character}
+      <CharacterCard {character} />
+    {/each}
+  </div>
+</section>
 
 <style>
   h3 {

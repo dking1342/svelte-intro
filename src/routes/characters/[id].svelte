@@ -26,22 +26,24 @@
   export let data: CharacterResults;
 </script>
 
-<div class="movie-details">
-  <div class="img-container">
-    <img src={data.image} alt={data.name} />
+<section class="container">
+  <div class="movie-details">
+    <div class="img-container">
+      <img src={data.image} alt={data.name} />
+    </div>
+    <div class="txt-container">
+      <h1>{data.name}</h1>
+      <p class="overview">
+        This character is a species of {data.species}. The
+        origin of this character is {data.origin.name}. The current status of this
+        character is {data.status}. The gender of this character is {data.gender}.
+        They are currently located in {data.location.name}.
+      </p>
+      <p><span>Created Date </span> { new Date(data.created).toLocaleDateString()}</p>
+    </div>
+    <a href="/">Go Back</a>
   </div>
-  <div class="txt-container">
-    <h1>{data.name}</h1>
-    <p class="overview">
-      This character is a species of {data.species}. The
-      origin of this character is {data.origin.name}. The current status of this
-      character is {data.status}. The gender of this character is {data.gender}.
-      They are currently located in {data.location.name}.
-    </p>
-    <p><span>Created Date </span> { new Date(data.created).toLocaleDateString()}</p>
-  </div>
-  <a href="/">Go Back</a>
-</div>
+</section>
 
 <style>
   h1{
