@@ -33,7 +33,6 @@
       </p>
       <p><span>Created Date </span> { new Date(data.created).toLocaleDateString()}</p>
     </div>
-    <a href="/">Go Back</a>
   </div>
 </section>
 

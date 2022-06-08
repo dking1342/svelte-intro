@@ -17,11 +17,13 @@
   import "./global.css";
   import CharacterList from "../components/CharacterList.svelte";
   import type { Characters } from "src/types/characters";
+  import SearchCharacters from "../components/SearchCharacters.svelte";
   export let data: Characters;
   export let characters = data.results;
 </script>
 
 <main>
+  <SearchCharacters />
   <CharacterList {characters} />
 </main>
 
