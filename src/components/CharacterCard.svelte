@@ -1,15 +1,17 @@
 <script lang="ts">
   import type { CharacterResults } from "../types/characters";
 
-  export let character:CharacterResults;  
+  export let character: CharacterResults;
 </script>
 
 <div class="movie-card">
-  <img src={character.image} alt={character.name}>
-  <div class="description">
-    <h2>{ character.name }</h2>
-    <p>{ new Date(character.created).toLocaleDateString() }</p>
-  </div>
+  <a href={`/characters/${character.id}`}>
+    <img src={character.image} alt={character.name} />
+    <div class="description">
+      <h2>{character.name}</h2>
+      <p>{new Date(character.created).toLocaleDateString()}</p>
+    </div>
+  </a>
 </div>
 
 <style>
@@ -20,21 +22,19 @@
     border-radius: 1rem;
     margin-bottom: 1rem;
   }
-  h2{
+  h2 {
     font-size: 0.9rem;
   }
-  .description{
+  .description {
     height: 5vh;
   }
-  p{
+  p {
     font-size: 0.9rem;
   }
-  .movie-card{
+  .movie-card {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    padding:1rem;
+    padding: 1rem;
   }
 </style>
-
-<!-- markup (zero or more items) goes here -->
