@@ -1,13 +1,14 @@
 <script>
+  import { FeedbackStore } from "../stores";
   import Card from "./Card.svelte";
   import Button from "./Button.svelte";
   import RatingSelect from "./RatingSelect.svelte";
 
   let text = "";
-  let rating = 10;
   let btnDisabled = true;
   let min = 10;
   let message;
+  $: rating = 10;
 
   const handleSelect = e => rating = e.detail;
 
@@ -24,15 +25,16 @@
   const handleSubmit = () => {
     if(text.trim().length > min){
       const newFeedback = {
-        id:Math.ceil(Math.random() * 1000),
+        id:Math.ceil(Math.random() * 100000),
         text,
         rating: +rating
       }
-      console.log(newFeedback);
-      // FeedbackStore.update((currentFeedback) => {
-      //   return [newFeedback, ...currentFeedback]
-      // })
+      FeedbackStore.update((currentFeedback) => {
+        return [newFeedback, ...currentFeedback]
+      })
       text = "";
+      rating = 10;
+      btnDisabled = true;
     }
   }
 
@@ -43,7 +45,7 @@
     <h2>How would you rate your service with us?</h2>
   </header>
   <form on:submit|preventDefault={handleSubmit}>
-    <RatingSelect on:rating-select={handleSelect} />
+    <RatingSelect on:rating-select={handleSelect} selected={rating}/>
     <div class="input-group">
       <input
         type="text"
