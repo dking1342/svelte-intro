@@ -1,22 +1,14 @@
 <script context="module">
+  import { fetchHook } from "../../utils/fetchHook";
   // @ts-ignore
   export const load = async ({ fetch, params }) => {
-    const response = await fetch(
-      `https://rickandmortyapi.com/api/character/${params.id}`
-    );
-    if (response.ok) {
-      const data = await response.json();
-      return {
-        props: {
-          data,
-        },
-      };
-    } else {
-      return {
-        props: {
-          data: {},
-        },
-      };
+    const url = `https://rickandmortyapi.com/api/character/${params.id}`;
+    const { payload } = await fetchHook(url,fetch);
+    
+    return {
+      props: {
+        data: payload
+      }
     }
   };
 </script>
@@ -29,7 +21,7 @@
 <section class="container">
   <div class="movie-details">
     <div class="img-container">
-      <img src={data.image} alt={data.name} />
+      <img src={data?.image} alt={data?.name} />
     </div>
     <div class="txt-container">
       <h1>{data.name}</h1>

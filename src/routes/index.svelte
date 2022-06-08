@@ -1,20 +1,14 @@
 <script context="module">
+  import { fetchHook } from "../utils/fetchHook";
   // @ts-ignore
   export async function load({ fetch }) {
-    const response = await fetch("https://rickandmortyapi.com/api/character");
-    if (response.ok) {
-      const data = await response.json();
-      return {
-        props: {
-          data,
-        },
-      };
-    } else {
-      return {
-        props: {
-          data: {},
-        },
-      };
+    const url = "https://rickandmortyapi.com/api/character";
+    const { payload } = await fetchHook(url,fetch);
+
+    return {
+      props:{
+        data:payload
+      }
     }
   }
 </script>
