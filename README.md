@@ -4,4 +4,4 @@
 Documentation for this code base can be found <a href="https://www.youtube.com/watch?v=zojEMeQGGHs">here</a>
 
 ## Explanation
-Using svelte we will make a poll app
+Going over the basics of svelte to create a simple crud app
