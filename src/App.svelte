@@ -1,5 +1,6 @@
 <script lang="ts">
-  import Modal from "./components/Model.svelte";
+  import AddPersonForm from "./components/AddPersonForm.svelte";
+import Modal from "./components/Model.svelte";
   interface People {
     name: string;
     beltColor: string;
@@ -28,14 +29,7 @@
   {showModal} 
   on:click={toggleModal}
 >
-  <form>
-    <input type="text" name="name" id="name" placeholder="name">
-    <input type="text" name="beltColor" id="beltColor" placeholder="belt color">
-    <button>Add Person</button>
-  </form>
-  <div slot="title">
-    <h3>Add new person</h3>
-  </div>
+  <AddPersonForm />
 </Modal>
 <main>
   <button on:click|once={toggleModal}>Open Modal</button>
