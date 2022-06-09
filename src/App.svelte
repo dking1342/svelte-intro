@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Modal from "./components/Model.svelte"
   interface People {
     name: string;
     beltColor: string;
@@ -19,14 +20,8 @@
   }
 </script>
 
-{#if num > 20}
-   <p>Greater than 20</p>
-{:else if num > 5}
-   <p>Greater than 5</p>
-{:else}
-  <p>Less than 5</p>
-{/if}
 
+<Modal />
 <main>
   {#each people as person (person.id)}
     <div>
