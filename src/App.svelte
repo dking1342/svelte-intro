@@ -1,36 +1,45 @@
 <script lang="ts">
-  import Modal from "./components/Model.svelte"
+  import Modal from "./components/Model.svelte";
   interface People {
     name: string;
     beltColor: string;
-    age:number;
-    id:number;
+    age: number;
+    id: number;
   }
 
-  let people:People[] = [
-    { name:"yoshi", beltColor:"black",age:25,id:1},
-    { name:"mario", beltColor:"orange",age:45,id:2},
-    { name:"luigi", beltColor:"brown",age:35,id:3},
+  let people: People[] = [
+    { name: "yoshi", beltColor: "black", age: 25, id: 1 },
+    { name: "mario", beltColor: "orange", age: 45, id: 2 },
+    { name: "luigi", beltColor: "brown", age: 35, id: 3 },
   ];
 
-  let num = 5;
+  let showModal = false;
 
   const handleDelete = (id) => {
-    people = people.filter(person => person.id !== id);
+    people = people.filter((person) => person.id !== id);
+  };
+
+  const toggleModal = () => {
+    showModal = !showModal;
   }
 </script>
 
-
-<Modal isPromo={true} message="Hello World!" />
+<Modal 
+  {showModal} 
+  isPromo={true} 
+  message="Hello World!" 
+  on:click={toggleModal}
+/>
 <main>
+  <button on:click={toggleModal}>Open Modal</button>
   {#each people as person (person.id)}
     <div>
       <h4>{person.name}</h4>
       {#if person.beltColor === "black"}
-         <p><strong>Master Ninja</strong></p>
+        <p><strong>Master Ninja</strong></p>
       {/if}
       <p>{person.age} years old, {person.beltColor} belt</p>
-      <button on:click={()=>handleDelete(person.id)}>Delete</button>
+      <button on:click={() => handleDelete(person.id)}>Delete</button>
     </div>
   {:else}
     <p>There are no people to show...</p>
