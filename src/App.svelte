@@ -12,15 +12,28 @@
     { name:"luigi", beltColor:"brown",age:35,id:3},
   ];
 
+  let num = 5;
+
   const handleDelete = (id) => {
     people = people.filter(person => person.id !== id);
   }
 </script>
 
+{#if num > 20}
+   <p>Greater than 20</p>
+{:else if num > 5}
+   <p>Greater than 5</p>
+{:else}
+  <p>Less than 5</p>
+{/if}
+
 <main>
   {#each people as person (person.id)}
     <div>
       <h4>{person.name}</h4>
+      {#if person.beltColor === "black"}
+         <p><strong>Master Ninja</strong></p>
+      {/if}
       <p>{person.age} years old, {person.beltColor} belt</p>
       <button on:click={()=>handleDelete(person.id)}>Delete</button>
     </div>
