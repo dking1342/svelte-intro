@@ -1,6 +1,6 @@
 <script lang="ts">
   export let isPromo:boolean = false;
-  export let message:string = "default value";
+  // export let message:string = "default value";
   export let showModal = false;
 
 </script>
@@ -8,7 +8,8 @@
 {#if showModal}
   <div class="backdrop" class:promo={isPromo} on:click|self>
     <div class="modal">
-      <p>{message}</p>
+      <slot name="title"></slot>
+      <slot></slot>
     </div>
   </div>
 {/if}
