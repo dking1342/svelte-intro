@@ -21,7 +21,7 @@
 </script>
 
 
-<Modal />
+<Modal isPromo={true} message="Hello World!" />
 <main>
   {#each people as person (person.id)}
     <div>
