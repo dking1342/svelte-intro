@@ -43,5 +43,9 @@
     padding: 1em;
     margin: 0 auto;
     max-width: 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 </style>
