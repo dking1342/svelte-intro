@@ -1,20 +1,32 @@
 <script lang="ts">
   let name = "Mario";
-  let beltColor = "Black"
+  let beltColor = "black"
 
   const handleChange = () => {
-    beltColor = "Orange";
+    beltColor = "orange";
+  }
+
+  const handleInput = (e) => {
+    beltColor = e.target.value;
   }
 </script>
 
 <main>
   <h1>Hello {name}!</h1>
-  <p>{beltColor} belt</p>
+  <p style="color:{beltColor}">{beltColor} belt</p>
+
+
+
   <button on:click={handleChange}>Update belt color</button>
+  <!-- one way data bind -->
+  <!-- <input type="text" on:input={handleInput} value={beltColor}> -->
+  
+  <!-- two way data bind -->
+  <input type="text" bind:value={beltColor}>
 </main>
 
 <style>
-  /* :root {
+  :root {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
       Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
@@ -54,5 +66,5 @@
     p {
       max-width: none;
     }
-  } */
+  }
 </style>
