@@ -1,5 +1,6 @@
 <script lang="ts">
-	import Footer from "./components/Footer.svelte";
+	import CreatePollForm from "./components/CreatePollForm.svelte";
+import Footer from "./components/Footer.svelte";
 	import Header from "./components/Header.svelte";
 	import Tabs from "./components/Tabs.svelte";
 	import { PollTabs } from "./tslib/PollEnum";
@@ -21,7 +22,7 @@
 	{#if activeItem === PollTabs.CURRENT_POLLS}
 		 <p>{ PollTabs.CURRENT_POLLS}</p>
 	{:else}
-		<p>{ PollTabs.ADD_NEW_POLL} </p>
+		<CreatePollForm />
 	{/if}
 </main>
 <Footer />
