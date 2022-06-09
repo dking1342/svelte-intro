@@ -1,5 +1,7 @@
 <script lang="ts">
+  import { ButtonType } from "../tslib/ButtonEnum";
   import type { FormPollType } from "../tslib/FormTypes";
+  import Button from "./Button.svelte";
 
   let fields: FormPollType = {
     question: "",
@@ -40,7 +42,9 @@
       bind:value={fields.answerB}
     />
   </div>
-  <button>Add Poll</button>
+  <Button type={ButtonType.SECONDARY} flat={true}>
+    Add Post
+  </Button>
 </form>
 
 <style>
@@ -54,15 +58,14 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap:12px;
+    gap: 12px;
   }
   input {
     width: 100%;
     border-radius: 6px;
     height: 40px;
     font-size: 18px;
-    padding:0 10px;
-    border:0.5px solid #555;
+    padding: 0 10px;
+    border: 0.5px solid #555;
   }
-  
 </style>
