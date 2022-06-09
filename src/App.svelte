@@ -1,54 +1,34 @@
 <script lang="ts">
-  let firstName = "Mario";
-  let lastName = "Kart";
-  let beltColor = "black"
-
-  $: fullName = `${firstName} ${lastName}`;
-  $: {
-    console.log(beltColor)
-    console.log(fullName)
+  interface People {
+    name: string;
+    beltColor: string;
+    age:number;
+    id:number;
   }
+
+  let people:People[] = [
+    { name:"yoshi", beltColor:"black",age:25,id:1},
+    { name:"mario", beltColor:"orange",age:45,id:2},
+    { name:"luigi", beltColor:"brown",age:35,id:3},
+  ];
 </script>
 
 <main>
-  <p>{fullName} - {beltColor} belt</p>
-  <input type="text" bind:value={firstName}>
-  <input type="text" bind:value={lastName}>
-  <input type="text" bind:value={beltColor}>
+  {#each people as person (person.id)}
+    <div>
+      <h4>{person.name}</h4>
+      <p>{person.age} years old, {person.beltColor} belt</p>
+    </div>
+  {:else}
+    <p>There are no people to show...</p>
+  {/each}
 </main>
 
 <style>
-  :root {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  }
-
   main {
     text-align: center;
     padding: 1em;
     margin: 0 auto;
+    max-width: 240px;
   }
-
-  /* img {
-    height: 16rem;
-    width: 16rem;
-  } */
-
-  /* h1 {
-    color: #ff3e00;
-    text-transform: uppercase;
-    font-size: 4rem;
-    font-weight: 100;
-    line-height: 1.1;
-    margin: 2rem auto;
-    max-width: 14rem;
-  } */
-
-  p {
-    max-width: 14rem;
-    margin: 1rem auto;
-    line-height: 1.35;
-  }
-
-
 </style>
