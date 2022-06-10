@@ -1,6 +1,8 @@
 <script lang="ts">
   import PollStore from "../stores/stores";
+import { ButtonType } from "../tslib/ButtonEnum";
   import type { FormPollType } from "../tslib/FormTypes";
+import Button from "./Button.svelte";
   import Card from "./Card.svelte";
 
   export let poll:FormPollType;
@@ -10,20 +12,28 @@
   $: percentB = Math.floor(100 / totalVotes * poll.votesB);
 
   const handleVote = (option,id) => {
-		$PollStore = $PollStore.map(poll => {
-			if(poll.id === Number(id)){
-				let votesForA = poll.votesA;
-				let votesForB = poll.votesB;
-				option === "a" ? votesForA += 1 : votesForB += 1;
-				return {
-					...poll,
-					votesA:votesForA,
-					votesB:votesForB
-				}
-			}
-			return poll;
-		})
+    PollStore.update(currentState => {
+      return currentState.map(poll => {
+        if(poll.id === Number(id)){
+          let votesForA = poll.votesA;
+          let votesForB = poll.votesB;
+          option === "a" ? votesForA += 1 : votesForB += 1;
+          return {
+            ...poll,
+            votesA:votesForA,
+            votesB:votesForB
+          }
+        }
+        return poll;
+      })
+    })
 	}
+
+  const handleDelete = (id) => {
+    PollStore.update(currentState => {
+      return currentState.filter(poll => poll.id !== id);
+    })
+  }
 </script>
 
 <Card>
@@ -38,6 +48,11 @@
       <div class="percent percent-b" style="width: {percentB}%;"></div>
       <span>{poll.answerB} ({poll.votesB})</span>
     </div>
+  </div>
+  <div class="delete">
+    <Button flat={true} on:click={()=>handleDelete(poll.id)}>
+      Delete
+    </Button>
   </div>
 </Card>
 
@@ -77,6 +92,10 @@
   .percent-b{
     border-left: 4px solid #45c469;
     background-color: rgba(69, 196, 150, 0.2);
+  }
+  .delete {
+    margin-top: 30px;
+    text-align: center;
   }
 </style>
 

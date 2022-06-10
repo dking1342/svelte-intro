@@ -7,7 +7,7 @@
 
 </script>
 
-<button class={type} class:flat class:inverse>
+<button class={type} class:flat class:inverse on:click>
   <slot />
 </button>
 
