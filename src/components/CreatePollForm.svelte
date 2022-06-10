@@ -1,10 +1,11 @@
 <script lang="ts">
-  import { validate_component } from "svelte/internal";
-import { ButtonType } from "../tslib/ButtonEnum";
+  import { createEventDispatcher } from "svelte/internal";
+  import { ButtonType } from "../tslib/ButtonEnum";
   import type { FormPollType, PollType } from "../tslib/FormTypes";
   import Button from "./Button.svelte";
   import FormField from "./FormField.svelte";
 
+  const dispatch = createEventDispatcher();
   let fieldResults: PollType[] = [
     {
       value: "",
@@ -61,8 +62,12 @@ import { ButtonType } from "../tslib/ButtonEnum";
         question: fieldResults[0].value,
         answerA: fieldResults[1].value,
         answerB: fieldResults[2].value,
+        votesA:0,
+        votesB:0,
+        id:Math.ceil(Math.random() * 100000),
       };
-      console.log("poll", poll);
+
+      dispatch("addPoll",poll);
 
       // reset state
       fieldResults = fieldResults.map((item) => {

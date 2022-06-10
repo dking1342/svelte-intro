@@ -3,6 +3,9 @@ export interface FormPollType {
   question:string;
   answerA:string;
   answerB:string;
+  votesA:number;
+  votesB:number;
+  id:number;
 }
 
 interface PollSubType {
