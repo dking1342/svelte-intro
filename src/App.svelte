@@ -31,13 +31,30 @@ import type { FormPollType } from "./tslib/FormTypes";
 		activeItem = PollTabs.CURRENT_POLLS;
 	}
 
+	const handleVote = (e) => {
+		const { option, id } = e.detail;
+		polls = polls.map(poll => {
+			if(poll.id === Number(id)){
+				let votesForA = poll.votesA;
+				let votesForB = poll.votesB;
+				option === "a" ? votesForA += 1 : votesForB += 1;
+				return {
+					...poll,
+					votesA:votesForA,
+					votesB:votesForB
+				}
+			}
+			return poll;
+		})
+	}
+
 </script>
 
 <Header />
 <main>
 	<Tabs {items} {activeItem} on:tabChange={tabChange} />
 	{#if activeItem === PollTabs.CURRENT_POLLS}
-		<PollList {polls} />
+		<PollList {polls} on:vote={handleVote} />
 	{:else}
 		<CreatePollForm on:addPoll={handleAddPoll} />
 	{/if}
