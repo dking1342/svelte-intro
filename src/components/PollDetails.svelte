@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { FormPollType } from "../tslib/FormTypes";
+import Card from "./Card.svelte";
 
 
   
@@ -8,18 +9,20 @@
   $: totalVotes = poll.votesA + poll.votesB;
 </script>
 
-<div class="poll">
-  <h3>{poll.question}</h3>
-  <p>Total Votes: {totalVotes}</p>
-  <div class="answer">
-    <div class="percent percent-a"></div>
-    <span>{poll.answerA} ({poll.votesA})</span>
+<Card>
+  <div class="poll">
+    <h3>{poll.question}</h3>
+    <p>Total Votes: {totalVotes}</p>
+    <div class="answer">
+      <div class="percent percent-a"></div>
+      <span>{poll.answerA} ({poll.votesA})</span>
+    </div>
+    <div class="answer">
+      <div class="percent percent-b"></div>
+      <span>{poll.answerB} ({poll.votesB})</span>
+    </div>
   </div>
-  <div class="answer">
-    <div class="percent percent-b"></div>
-    <span>{poll.answerB} ({poll.votesB})</span>
-  </div>
-</div>
+</Card>
 
 <style>
   h3 {
@@ -47,4 +50,3 @@
   }
 </style>
 
-<!-- markup (zero or more items) goes here -->
