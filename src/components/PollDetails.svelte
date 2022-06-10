@@ -1,21 +1,29 @@
 <script lang="ts">
-  import { createEventDispatcher } from "svelte";
+  import PollStore from "../stores/stores";
   import type { FormPollType } from "../tslib/FormTypes";
   import Card from "./Card.svelte";
 
-  const dispatch = createEventDispatcher();
   export let poll:FormPollType;
-
 
   $: totalVotes = poll.votesA + poll.votesB;
   $: percentA = Math.floor(100 / totalVotes * poll.votesA);
   $: percentB = Math.floor(100 / totalVotes * poll.votesB);
 
-  
-
-  const handleVote = (option, id) => {
-    dispatch("vote",{option,id})
-  }
+  const handleVote = (option,id) => {
+		$PollStore = $PollStore.map(poll => {
+			if(poll.id === Number(id)){
+				let votesForA = poll.votesA;
+				let votesForB = poll.votesB;
+				option === "a" ? votesForA += 1 : votesForB += 1;
+				return {
+					...poll,
+					votesA:votesForA,
+					votesB:votesForB
+				}
+			}
+			return poll;
+		})
+	}
 </script>
 
 <Card>

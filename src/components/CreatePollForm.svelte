@@ -1,5 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte/internal";
+  import PollStore from "../stores/stores";
   import { ButtonType } from "../tslib/ButtonEnum";
   import type { FormPollType, PollType } from "../tslib/FormTypes";
   import Button from "./Button.svelte";
@@ -32,27 +33,27 @@
 
   const handleChange = (e) => {
     if (e.detail.target.value.trim().length < 1) {
-      fieldResults = fieldResults.map(item => {
-        if(item.name === e.detail.target.name){
+      fieldResults = fieldResults.map((item) => {
+        if (item.name === e.detail.target.name) {
           return {
             ...item,
             errors: "Field cannot be empty",
-            styles:false
-          }
+            styles: false,
+          };
         }
         return item;
-      })
+      });
     } else {
-      fieldResults = fieldResults.map(item => {
-        if(item.name === e.detail.target.name){
+      fieldResults = fieldResults.map((item) => {
+        if (item.name === e.detail.target.name) {
           return {
             ...item,
             errors: "",
-            styles:true
-          }
+            styles: true,
+          };
         }
         return item;
-      })
+      });
     }
   };
 
@@ -62,12 +63,13 @@
         question: fieldResults[0].value,
         answerA: fieldResults[1].value,
         answerB: fieldResults[2].value,
-        votesA:0,
-        votesB:0,
-        id:Math.ceil(Math.random() * 100000),
+        votesA: 0,
+        votesB: 0,
+        id: Math.ceil(Math.random() * 100000),
       };
+      $PollStore = [poll, ...$PollStore];
 
-      dispatch("addPoll",poll);
+      dispatch("addPoll", null);
 
       // reset state
       fieldResults = fieldResults.map((item) => {
@@ -86,11 +88,8 @@
   {#each fieldResults as poll}
     <FormField {poll} on:handleChange={handleChange} />
   {/each}
-  {#if fieldResults.every(val => val.styles)}
-    <Button
-      type={ButtonType.SECONDARY}
-      flat={true}>Add Post
-    </Button>
+  {#if fieldResults.every((val) => val.styles)}
+    <Button type={ButtonType.SECONDARY} flat={true}>Add Post</Button>
   {/if}
 </form>
 

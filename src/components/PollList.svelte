@@ -1,14 +1,12 @@
 <script lang="ts">
-  import type { FormPollType } from "../tslib/FormTypes";
-import PollDetails from "./PollDetails.svelte";
-
-  export let polls:FormPollType[] = [];
+  import PollStore from "../stores/stores";
+  import PollDetails from "./PollDetails.svelte";
 </script>
 
 <div class="poll-list">
-  {#each polls as poll (poll.id)}
+  {#each $PollStore as poll (poll.id)}
      <div>
-       <PollDetails {poll} on:vote />
+       <PollDetails {poll} />
      </div>
   {/each}
 </div>
@@ -20,5 +18,3 @@ import PollDetails from "./PollDetails.svelte";
     gap:20px;
   }
 </style>
-
-<!-- markup (zero or more items) goes here -->

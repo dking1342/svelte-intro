@@ -1,60 +1,29 @@
 <script lang="ts">
 	import CreatePollForm from "./components/CreatePollForm.svelte";
-import Footer from "./components/Footer.svelte";
+	import Footer from "./components/Footer.svelte";
 	import Header from "./components/Header.svelte";
-import PollList from "./components/PollList.svelte";
+	import PollList from "./components/PollList.svelte";
 	import Tabs from "./components/Tabs.svelte";
-import type { FormPollType } from "./tslib/FormTypes";
+	import PollStore from "./stores/stores";
 	import { PollTabs } from "./tslib/PollEnum";
-
-
 
 	let items = [PollTabs.CURRENT_POLLS, PollTabs.ADD_NEW_POLL];
 	let activeItem = PollTabs.CURRENT_POLLS;
-	let polls:FormPollType[] = [
-		{
-			id:1,
-			question:"Python or Javascript?",
-			answerA:"Python",
-			answerB:"Javascript",
-			votesA:9,
-			votesB:15
-		}
-	];
 
 	const tabChange = (e) => {
 		activeItem = e.detail;
 	}
 
 	const handleAddPoll = (e) => {
-		polls = [e.detail, ...polls];
 		activeItem = PollTabs.CURRENT_POLLS;
 	}
-
-	const handleVote = (e) => {
-		const { option, id } = e.detail;
-		polls = polls.map(poll => {
-			if(poll.id === Number(id)){
-				let votesForA = poll.votesA;
-				let votesForB = poll.votesB;
-				option === "a" ? votesForA += 1 : votesForB += 1;
-				return {
-					...poll,
-					votesA:votesForA,
-					votesB:votesForB
-				}
-			}
-			return poll;
-		})
-	}
-
 </script>
 
 <Header />
 <main>
 	<Tabs {items} {activeItem} on:tabChange={tabChange} />
 	{#if activeItem === PollTabs.CURRENT_POLLS}
-		<PollList {polls} on:vote={handleVote} />
+		<PollList />
 	{:else}
 		<CreatePollForm on:addPoll={handleAddPoll} />
 	{/if}
