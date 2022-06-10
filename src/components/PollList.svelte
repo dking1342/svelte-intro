@@ -1,12 +1,15 @@
 <script lang="ts">
   import type { FormPollType } from "../tslib/FormTypes";
+import PollDetails from "./PollDetails.svelte";
 
   export let polls:FormPollType[] = [];
 </script>
 
 <div class="poll-list">
   {#each polls as poll (poll.id)}
-     <div>{poll.question}</div>
+     <div>
+       <PollDetails {poll} />
+     </div>
   {/each}
 </div>
 
